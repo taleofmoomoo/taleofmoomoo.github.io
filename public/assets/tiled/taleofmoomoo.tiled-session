@@ -1,0 +1,52 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "maps/demo.json": {
+            "scale": 2.46,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 114.22764227642276,
+                "y": -391.869918699187
+            }
+        },
+        "maps/demo.json#Adventure": {
+            "scaleInDock": 1.6402,
+            "scaleInEditor": 1
+        },
+        "maps/demo.json#Collisions": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/demo.json#Demo": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/demo.json#Ground": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/demo.json#Water": {
+            "scaleInEditor": 1
+        },
+        "maps/demo.json#Water 1": {
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/Users/vineshkannan/Documents/Memes/taleofmoomoo.github.io/public/assets/tiled/tiles",
+    "openFiles": [
+    ],
+    "project": "taleofmoomoo.tiled-project",
+    "recentFiles": [
+        "maps/demo.json"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

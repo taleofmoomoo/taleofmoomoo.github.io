@@ -135,5 +135,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-**.tiled-session
 .DS_Store
+public/assets/tiled/taleofmoomoo.tiled-session

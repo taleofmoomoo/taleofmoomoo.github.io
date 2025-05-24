@@ -16,7 +16,7 @@ const doChatWithCat = interactIfNotStarted<GameScene>(async (scene) => {
 
 const interactables: Interactable<GameScene>[] = [
   {
-    cells: makeCat({ x: 27, y: 52 }),
+    cells: makeCat({ x: 17, y: 34 }),
     action: doChatWithCat,
   },
 ];

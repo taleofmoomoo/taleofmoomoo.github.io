@@ -50,3 +50,13 @@ html {
   from, to { border-color: transparent }
   50% { border-color: var(--accent-color); }
 }
+
+#debug {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 30px;
+}

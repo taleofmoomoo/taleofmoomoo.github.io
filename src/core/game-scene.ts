@@ -33,6 +33,7 @@ export class GameScene extends Phaser.Scene {
   parentEl!: HTMLElement;
   textWrapper!: HTMLElement;
   textContent!: HTMLElement;
+  debugEl!: HTMLElement;
 
   constructor(config: {
     key: string;
@@ -59,6 +60,7 @@ export class GameScene extends Phaser.Scene {
     scene.parentEl = document.getElementById("game")!;
     scene.textWrapper = scene.parentEl.querySelector(".text-wrapper")!;
     scene.textContent = scene.textWrapper.querySelector(".text-content")!;
+    scene.debugEl = scene.parentEl.querySelector("#debug")!;
 
     const tileData = this.tileMap;
     const tileMap = this.make.tilemap({ key: tileData.path });
@@ -141,6 +143,9 @@ export class GameScene extends Phaser.Scene {
       const pos = this.gridEngine.getFacingPosition(PLAYER_ID);
       this.maybeDoActionAt(pos);
     }
+
+    const current = this.gridEngine.getPosition(PLAYER_ID);
+    this.debugEl.innerText = `${current.x}, ${current.y}`;
   }
 
   preload() {

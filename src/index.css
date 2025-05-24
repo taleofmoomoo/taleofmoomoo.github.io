@@ -16,7 +16,7 @@ html {
   display: inline-block;
   box-sizing: border-box;
   text-align: left;
-  width: 50vw;
+  width: 600px;
   padding: 20px;
   border-style: solid;
   border-color: var(--accent-color);
@@ -28,7 +28,6 @@ html {
   font-size: 20px;
   height: 80px;
   line-height: 30px;
-  text-transform: uppercase;
 }
 
 .text-content {
@@ -49,6 +48,20 @@ html {
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: var(--accent-color); }
+}
+
+
+#hud {
+  display: none;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  color: white;
+  font-family: monospace;
+  font-size: 18px;
+  padding: 30px;
+  padding-top: 40px;
 }
 
 #debug {

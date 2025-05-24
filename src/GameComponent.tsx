@@ -44,6 +44,7 @@ export function GameComponent() {
           <div className="text-content">Hello</div>
         </div>
       </div>
+      <div id="hud"></div>
       <div id="debug"></div>
     </div>
   );

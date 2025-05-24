@@ -142,3 +142,15 @@ export function getLayerPropertyValue(
   const property = properties.find((p) => p.name === name && p.type === type);
   return property?.value ?? null;
 }
+
+export function getManhattanDistance(a: Cell, b: Cell): number {
+  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+}
+
+export function plural(
+  count: number,
+  singular: string,
+  plural: string
+): string {
+  return count === 1 ? singular : plural;
+}

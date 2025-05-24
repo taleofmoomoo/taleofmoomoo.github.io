@@ -21,19 +21,22 @@ import {
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export class GameScene extends Phaser.Scene {
+export class GameScene<T> extends Phaser.Scene {
   gridEngine!: GridEngine;
   tileMap!: TileMap;
   music?: MusicConfig;
   startCharLayer: string;
   startPosition: PositionDict = { x: 0, y: 0 };
-  interactionMap: InteractionMap<GameScene> = {};
+  interactionMap: InteractionMap<GameScene<T>> = {};
   isInteracting: boolean = false;
 
   parentEl!: HTMLElement;
   textWrapper!: HTMLElement;
   textContent!: HTMLElement;
+  hudEl!: HTMLElement;
   debugEl!: HTMLElement;
+
+  public state: T;
 
   constructor(config: {
     key: string;
@@ -41,7 +44,8 @@ export class GameScene extends Phaser.Scene {
     tileMap: TileMap;
     startCharLayer: string;
     startPosition: PositionDict;
-    interactionMap: InteractionMap<GameScene>;
+    interactionMap: InteractionMap<GameScene<T>>;
+    initialState: T;
   }) {
     super({
       key: config.key,
@@ -53,6 +57,7 @@ export class GameScene extends Phaser.Scene {
     this.startCharLayer = config.startCharLayer;
     this.startPosition = config.startPosition;
     this.interactionMap = config.interactionMap;
+    this.state = config.initialState;
   }
 
   create() {
@@ -60,6 +65,7 @@ export class GameScene extends Phaser.Scene {
     scene.parentEl = document.getElementById("game")!;
     scene.textWrapper = scene.parentEl.querySelector(".text-wrapper")!;
     scene.textContent = scene.textWrapper.querySelector(".text-content")!;
+    scene.hudEl = scene.parentEl.querySelector("#hud")!;
     scene.debugEl = scene.parentEl.querySelector("#debug")!;
 
     const tileData = this.tileMap;
@@ -113,6 +119,7 @@ export class GameScene extends Phaser.Scene {
 
   createThen() {}
   preloadThen() {}
+  updateThen() {}
 
   async maybeDoActionAt(cell: Cell) {
     const scene = this;
@@ -146,6 +153,7 @@ export class GameScene extends Phaser.Scene {
 
     const current = this.gridEngine.getPosition(PLAYER_ID);
     this.debugEl.innerText = `${current.x}, ${current.y}`;
+    this.updateThen();
   }
 
   preload() {
@@ -160,15 +168,33 @@ export class GameScene extends Phaser.Scene {
     scene.preloadThen();
   }
 
-  showText(text: string, ms: number) {
+  async showText(text: string, ms: number) {
     const scene = this;
     if (!scene.textWrapper || !scene.textContent) return;
     scene.scene.pause();
     scene.textWrapper.style.display = "block";
     scene.textContent.innerText = text;
-    setTimeout(() => {
-      scene.textWrapper.style.display = "none";
-      scene.scene.resume();
-    }, ms);
+    await sleep(ms);
+    scene.textWrapper.style.display = "none";
+    scene.textContent.innerText = "";
+    scene.scene.resume();
+  }
+
+  writeToHud(text: string) {
+    if (!this.hudEl) return;
+    this.hudEl.style.display = "block";
+    this.hudEl.innerText = text;
+  }
+
+  hideHud() {
+    if (!this.hudEl) return;
+    this.hudEl.innerText = "";
+    this.hudEl.style.display = "none";
+  }
+
+  async writeToHudForMs(text: string, ms: number) {
+    this.writeToHud(text);
+    await sleep(ms);
+    this.hideHud();
   }
 }

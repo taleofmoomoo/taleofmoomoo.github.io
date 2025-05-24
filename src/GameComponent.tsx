@@ -37,5 +37,13 @@ export function GameComponent() {
     return () => game.destroy(true);
   }, []);
 
-  return <div id="game" />;
+  return (
+    <div id="game">
+      <div className="text-wrapper">
+        <div className="text-box">
+          <div className="text-content">Hello</div>
+        </div>
+      </div>
+    </div>
+  );
 }

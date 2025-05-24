@@ -67,7 +67,7 @@ export function tileToPixels(t: number): number {
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export function showText(
+export function renderText(
   scene: Phaser.Scene,
   x: number,
   y: number,

@@ -35,7 +35,10 @@ export class HillScene extends GameScene {
   //   const scene = this;
   // }
 
-  // createThen() {
-  //   const scene = this;
-  // }
+  createThen() {
+    const scene = this;
+    setTimeout(() => {
+      scene.showText("Welcome", 30000);
+    }, 3000);
+  }
 }

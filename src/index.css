@@ -1,3 +1,52 @@
 html {
   background: black;
+  --accent-color: #e9a62d;
+}
+
+.text-wrapper {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.text-box {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: left;
+  width: 50vw;
+  padding: 20px;
+  border-style: solid;
+  border-color: var(--accent-color);
+  border-width: 5px;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  font-family: monospace;
+  font-size: 20px;
+  height: 80px;
+  line-height: 30px;
+  text-transform: uppercase;
+}
+
+.text-content {
+  overflow: hidden;
+  border-right: 3px solid var(--accent-color);
+  white-space: nowrap;
+  animation:
+    typing 2s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* https://css-tricks.com/snippets/css/typewriter-effect/ */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color); }
 }

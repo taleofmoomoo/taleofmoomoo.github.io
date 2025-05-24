@@ -18,6 +18,8 @@ import {
   getLayerPropertyValue,
 } from "./utils";
 
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export class GameScene extends Phaser.Scene {
   gridEngine!: GridEngine;
   tileMap!: TileMap;
@@ -25,6 +27,10 @@ export class GameScene extends Phaser.Scene {
   startCharLayer: string;
   startPosition: PositionDict = { x: 0, y: 0 };
   sceneInteractionMap: SceneInteractionMap = {};
+
+  parentEl!: HTMLElement;
+  textWrapper!: HTMLElement;
+  textContent!: HTMLElement;
 
   constructor(config: {
     key: string;
@@ -47,6 +53,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   create() {
+    const scene = this;
+    scene.parentEl = document.getElementById("game")!;
+    scene.textWrapper = scene.parentEl.querySelector(".text-wrapper")!;
+    scene.textContent = scene.textWrapper.querySelector(".text-content")!;
+
     const tileData = this.tileMap;
     const tileMap = this.make.tilemap({ key: tileData.path });
     tileData.tileSets.forEach((ts) =>
@@ -133,5 +144,17 @@ export class GameScene extends Phaser.Scene {
       scene.load.audio(scene.music.path, scene.music.path);
     }
     scene.preloadThen();
+  }
+
+  showText(text: string, ms: number) {
+    const scene = this;
+    if (!scene.textWrapper || !scene.textContent) return;
+    scene.scene.pause();
+    scene.textWrapper.style.display = "block";
+    scene.textContent.innerText = text;
+    setTimeout(() => {
+      scene.textWrapper.style.display = "none";
+      scene.scene.resume();
+    }, ms);
   }
 }

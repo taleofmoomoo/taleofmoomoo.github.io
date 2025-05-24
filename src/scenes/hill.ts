@@ -19,6 +19,10 @@ export class HillScene extends GameScene {
             name: "Water",
             path: "../assets/tiled/tiles/water-day-1.png",
           },
+          {
+            name: "Creatures",
+            path: "../assets/tiled/sprites/monsters-animals-cats.png",
+          },
         ],
       },
       startCharLayer: "Collisions",

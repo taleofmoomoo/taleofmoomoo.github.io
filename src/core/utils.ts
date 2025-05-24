@@ -1,3 +1,5 @@
+import { Direction } from "grid-engine";
+
 export type PhaserSound =
   | Phaser.Sound.NoAudioSound
   | Phaser.Sound.HTML5AudioSound
@@ -153,4 +155,26 @@ export function plural(
   plural: string
 ): string {
   return count === 1 ? singular : plural;
+}
+
+export function getDirection(fromPos: Cell, toPos: Cell): Direction {
+  if (fromPos.x < toPos.x) {
+    return Direction.LEFT;
+  } else if (fromPos.x > toPos.x) {
+    return Direction.RIGHT;
+  } else if (fromPos.y < toPos.y) {
+    return Direction.UP;
+  } else if (fromPos.y > toPos.y) {
+    return Direction.DOWN;
+  }
+  return Direction.NONE;
+}
+
+export function makeRows(lines: { leftEdge: Cell; length: number }[]): Cell[] {
+  return lines.flatMap(({ leftEdge, length }) =>
+    Array.from({ length }, (_, i) => ({
+      x: leftEdge.x + i,
+      y: leftEdge.y,
+    }))
+  );
 }

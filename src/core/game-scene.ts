@@ -133,6 +133,12 @@ export class GameScene<T> extends Phaser.Scene {
     }
   }
 
+  debugPosition() {
+    const current = this.gridEngine.getPosition(PLAYER_ID);
+    this.debugEl.innerText = `${current.x}, ${current.y}`;
+    this.updateThen();
+  }
+
   public update() {
     const cursors = this?.input?.keyboard?.createCursorKeys();
     if (!cursors) return;
@@ -151,9 +157,7 @@ export class GameScene<T> extends Phaser.Scene {
       this.maybeDoActionAt(pos);
     }
 
-    const current = this.gridEngine.getPosition(PLAYER_ID);
-    this.debugEl.innerText = `${current.x}, ${current.y}`;
-    this.updateThen();
+    this.debugPosition();
   }
 
   preload() {

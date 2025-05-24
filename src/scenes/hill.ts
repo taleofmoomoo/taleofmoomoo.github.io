@@ -4,6 +4,7 @@ import {
   getInteractionMap,
   getManhattanDistance,
   interactIfNotStarted,
+  makeRows,
   PLAYER_ID,
   plural,
 } from "../core/utils";
@@ -20,15 +21,6 @@ function makeTwoByOneAt(topLeft: Cell): Cell[] {
     { x, y },
     { x: x + 1, y },
   ];
-}
-
-function makeCliffEdge(lines: { leftEdge: Cell; length: number }[]): Cell[] {
-  return lines.flatMap(({ leftEdge, length }) =>
-    Array.from({ length }, (_, i) => ({
-      x: leftEdge.x + i,
-      y: leftEdge.y,
-    }))
-  );
 }
 
 const CAT_RIGHT_CELL = { x: 18, y: 34 };
@@ -111,7 +103,7 @@ const interactables: Interactable<GameScene<HillState>>[] = [
     action: doChatWithRock,
   },
   {
-    cells: makeCliffEdge([
+    cells: makeRows([
       { leftEdge: { x: 29, y: 58 }, length: 3 },
       { leftEdge: { x: 28, y: 59 }, length: 5 },
       { leftEdge: { x: 24, y: 60 }, length: 21 },
@@ -149,6 +141,8 @@ export class HillScene extends GameScene<HillState> {
       },
       startCharLayer: "Collisions",
       startPosition: { x: 27, y: 57 },
+      // For testing the start of the puzzle.
+      // startPosition: { x: 18, y: 35 }
       interactionMap,
       initialState: {
         isWalking: false,

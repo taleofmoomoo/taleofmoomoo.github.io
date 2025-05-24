@@ -22,7 +22,7 @@ export class DemoScene extends GameScene {
         ],
       },
       startCharLayer: "Collisions",
-      startPosition: { x: 3, y: 3 },
+      startPosition: { x: 7, y: 12 },
       sceneInteractionMap: {},
     });
   }

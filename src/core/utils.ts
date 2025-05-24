@@ -6,8 +6,21 @@ export type PhaserSound =
 export type PositionDict = { x: number; y: number };
 export type FacingDirection = "up" | "down" | "left" | "right";
 
-export type Interaction = (scene: Phaser.Scene) => Promise<void>;
-export type SceneInteractionMap = { [id: string]: Interaction };
+export type Cell = {
+  x: number;
+  y: number;
+};
+
+export type Interaction<S extends Phaser.Scene> = (scene: S) => Promise<void>;
+
+export type Interactable<S extends Phaser.Scene> = {
+  cells: Cell[];
+  action: Interaction<S>;
+};
+
+export type InteractionMap<S extends Phaser.Scene> = {
+  [cellHash: string]: Interaction<S>;
+};
 
 export type TileSet = {
   name: string;
@@ -53,6 +66,8 @@ export const FONT = "Arial";
 export const TEXT_SIZE = 24;
 export const TEXT_PAD = 8;
 
+export const SECOND_MS = 1000;
+
 export function Facing(
   x: number,
   y: number,
@@ -84,9 +99,33 @@ export function renderText(
   return textObject;
 }
 
-export function interactIfNotStarted(doInteract: Interaction): Interaction {
+export function hashCell(cell: Cell): string {
+  return `${cell.x}-${cell.y}`;
+}
+
+export function getInteractionMap<S extends Phaser.Scene>(
+  interactables: Interactable<S>[]
+): InteractionMap<S> {
+  return interactables.reduce(
+    (agg, val) => ({
+      ...agg,
+      ...val.cells.reduce(
+        (cellMap, cell) => ({
+          ...cellMap,
+          [hashCell(cell)]: val.action,
+        }),
+        {}
+      ),
+    }),
+    {}
+  );
+}
+
+export function interactIfNotStarted<S extends Phaser.Scene>(
+  doInteract: Interaction<S>
+): Interaction<S> {
   let isStarted = false;
-  return async (scene: Phaser.Scene) => {
+  return async (scene: S) => {
     if (isStarted) return;
     isStarted = true;
     await doInteract(scene);

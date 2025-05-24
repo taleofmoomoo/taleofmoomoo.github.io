@@ -4,8 +4,8 @@ import type {
   TileMap,
   MusicConfig,
   PositionDict,
-  SceneInteractionMap,
-  FacingDirection,
+  InteractionMap,
+  Cell,
 } from "./utils";
 import {
   PLAYER_ID,
@@ -14,8 +14,9 @@ import {
   PLAYER_SPRITE_INDEX,
   PLAYER_SPRITE_SHEET,
   PLAYER_SPRITE_SIZE,
-  Facing,
+  SECOND_MS,
   getLayerPropertyValue,
+  hashCell,
 } from "./utils";
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -26,7 +27,8 @@ export class GameScene extends Phaser.Scene {
   music?: MusicConfig;
   startCharLayer: string;
   startPosition: PositionDict = { x: 0, y: 0 };
-  sceneInteractionMap: SceneInteractionMap = {};
+  interactionMap: InteractionMap<GameScene> = {};
+  isInteracting: boolean = false;
 
   parentEl!: HTMLElement;
   textWrapper!: HTMLElement;
@@ -38,7 +40,7 @@ export class GameScene extends Phaser.Scene {
     tileMap: TileMap;
     startCharLayer: string;
     startPosition: PositionDict;
-    sceneInteractionMap: SceneInteractionMap;
+    interactionMap: InteractionMap<GameScene>;
   }) {
     super({
       key: config.key,
@@ -49,7 +51,7 @@ export class GameScene extends Phaser.Scene {
     this.tileMap = config.tileMap;
     this.startCharLayer = config.startCharLayer;
     this.startPosition = config.startPosition;
-    this.sceneInteractionMap = config.sceneInteractionMap;
+    this.interactionMap = config.interactionMap;
   }
 
   create() {
@@ -110,6 +112,18 @@ export class GameScene extends Phaser.Scene {
   createThen() {}
   preloadThen() {}
 
+  async maybeDoActionAt(cell: Cell) {
+    const scene = this;
+    const cellHash = hashCell(cell);
+    const doAction = scene.interactionMap?.[cellHash];
+    if (doAction && !scene.isInteracting) {
+      scene.isInteracting = true;
+      await doAction(scene);
+      await sleep(SECOND_MS);
+      scene.isInteracting = false;
+    }
+  }
+
   public update() {
     const cursors = this?.input?.keyboard?.createCursorKeys();
     if (!cursors) return;
@@ -124,13 +138,8 @@ export class GameScene extends Phaser.Scene {
     }
 
     if (cursors.space.isDown) {
-      const dir = this.gridEngine.getFacingDirection(PLAYER_ID);
       const pos = this.gridEngine.getFacingPosition(PLAYER_ID);
-      const facing = Facing(pos.x, pos.y, dir as FacingDirection);
-      const doInteract = this.sceneInteractionMap?.[facing];
-      if (doInteract) {
-        doInteract(this);
-      }
+      this.maybeDoActionAt(pos);
     }
   }
 

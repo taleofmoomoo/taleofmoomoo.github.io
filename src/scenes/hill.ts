@@ -1,4 +1,27 @@
 import { GameScene } from "../core/game-scene";
+import type { Cell, Interactable } from "../core/utils";
+import { getInteractionMap, interactIfNotStarted } from "../core/utils";
+
+function makeCat(topLeft: Cell): Cell[] {
+  const { x, y } = topLeft;
+  return [
+    { x, y },
+    { x: x + 1, y },
+  ];
+}
+
+const doChatWithCat = interactIfNotStarted<GameScene>(async (scene) => {
+  scene.showText("Hello, cat!", 3000);
+});
+
+const interactables: Interactable<GameScene>[] = [
+  {
+    cells: makeCat({ x: 27, y: 52 }),
+    action: doChatWithCat,
+  },
+];
+
+const interactionMap = getInteractionMap(interactables);
 
 export class HillScene extends GameScene {
   constructor() {
@@ -27,7 +50,7 @@ export class HillScene extends GameScene {
       },
       startCharLayer: "Collisions",
       startPosition: { x: 27, y: 57 },
-      sceneInteractionMap: {},
+      interactionMap,
     });
   }
 
@@ -35,10 +58,7 @@ export class HillScene extends GameScene {
   //   const scene = this;
   // }
 
-  createThen() {
-    const scene = this;
-    setTimeout(() => {
-      scene.showText("Welcome", 30000);
-    }, 3000);
-  }
+  // createThen() {
+  //   const scene = this;
+  // }
 }

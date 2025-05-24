@@ -22,7 +22,7 @@ const doWaterfall = interactIfNotStarted<GameScene<WaterfallState>>(
   async (scene) => {
     await scene.showText("You reached the waterfall.", 3000);
     // scene.scene.start("DemoScene");
-    window.open("/assets/videos/portal.mp4", "_blank");
+    window.open("/assets/video/portal.mp4", "_blank");
   }
 );
 
@@ -60,6 +60,9 @@ export class WaterfallScene extends GameScene<WaterfallState> {
           },
         ],
       },
+      music: {
+        path: "../assets/audio/a-flock-of-bubbles-looping.mp3",
+      },
       startCharLayer: "Collisions",
       startPosition: { x: 30, y: 70 },
       // For testing the end of the puzzle.
@@ -74,6 +77,9 @@ export class WaterfallScene extends GameScene<WaterfallState> {
 
   createThen() {
     const scene = this;
+    setTimeout(() => {
+      scene.showText("Where water flows long, the current is strong.", 3000);
+    }, 3000);
 
     function startSliding(direction: Direction) {
       scene.state.nextSlidingDirection = direction;

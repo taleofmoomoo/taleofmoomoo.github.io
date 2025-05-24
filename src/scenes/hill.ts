@@ -30,17 +30,13 @@ const doChatWithCat = interactIfNotStarted<GameScene<HillState>>(
   async (scene) => {
     const { isWalking, isSolved } = scene.state;
     if (isSolved) {
-      await scene.showText("Remember: FRIENDSHIP is the key...", 3000);
       await scene.showText("The path home is through the cave...", 3000);
       await scene.showText("Go to the cliff. Take a leap of faith.", 3000);
       return;
     }
 
     if (!isWalking) {
-      await scene.showText(
-        "If you want to go home, FRIENDSHIP is the key...",
-        3000
-      );
+      await scene.showText("To find your way home, you must be brave...", 3000);
       await scene.showText("Go for a BIG WALK and come back to me.", 3000);
       scene.state.isWalking = true;
       scene.state.farthestPoint = CAT_RIGHT_CELL;
@@ -54,7 +50,7 @@ const doChatWithCat = interactIfNotStarted<GameScene<HillState>>(
 
     if (distanceWalked === BIG_WALK_TARGET_DISTANCE) {
       await scene.showText("Now THAT is what I call a big walk! ...", 3000);
-      await scene.showText("The path home is through the cave...", 3000);
+      await scene.showText("The path home runs through the falls...", 3000);
       await scene.showText("Go to the cliff. Take a leap of faith.", 3000);
       scene.hideHud();
       scene.state.farthestPoint = CAT_RIGHT_CELL;
@@ -86,7 +82,7 @@ const doLeapOfFaith = interactIfNotStarted<GameScene<HillState>>(
   async (scene) => {
     if (scene.state.isSolved) {
       await scene.showText("You take a leap of faith...", 3000);
-      scene.scene.start("DemoScene");
+      scene.scene.start("WaterfallScene");
     } else {
       await scene.showText("This cliff looks scary.", 3000);
     }
@@ -139,10 +135,13 @@ export class HillScene extends GameScene<HillState> {
           },
         ],
       },
+      music: {
+        path: "../assets/audio/hypnotic-puzzle-2-looping.mp3",
+      },
       startCharLayer: "Collisions",
       startPosition: { x: 27, y: 57 },
       // For testing the start of the puzzle.
-      // startPosition: { x: 18, y: 35 }
+      // startPosition: { x: 18, y: 35 },
       interactionMap,
       initialState: {
         isWalking: false,

@@ -41,6 +41,26 @@
         },
         "maps/demo.json#Water 1": {
             "scaleInEditor": 1
+        },
+        "maps/hill.json": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 178.33333333333331,
+                "y": -211.33333333333331
+            }
+        },
+        "maps/hill.json#Adventure": {
+            "scaleInDock": 1
+        },
+        "maps/hill.json#Collisions": {
+            "scaleInDock": 1
+        },
+        "maps/hill.json#Creatures": {
+            "scaleInDock": 1
+        },
+        "maps/hill.json#Water": {
+            "scaleInDock": 1
         }
     },
     "last.imagePath": "/Users/vineshkannan/Documents/Memes/taleofmoomoo.github.io/public/assets/tiled/sprites",
@@ -48,7 +68,9 @@
         "maps/demo.json"
     ],
     "project": "taleofmoomoo.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
+        "maps/hill.json",
         "maps/demo.json"
     ],
     "tileset.embedInMap": true,

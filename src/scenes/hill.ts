@@ -158,10 +158,6 @@ export class HillScene extends GameScene<HillState> {
     });
   }
 
-  // preloadThen() {
-  //   const scene = this;
-  // }
-
   createThen() {
     const scene = this;
     setTimeout(() => {

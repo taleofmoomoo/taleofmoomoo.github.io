@@ -2,12 +2,17 @@ import Phaser from "phaser";
 import { GridEngine } from "grid-engine";
 import { useEffect } from "react";
 import { DemoScene } from "./scenes/demo";
-import { HillScene } from "./scenes/hill";
+// import { HillScene } from "./scenes/hill";
+import { WaterfallScene } from "./scenes/waterfall";
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: "Tale of Moomoo",
   type: Phaser.AUTO,
-  scene: [HillScene, DemoScene],
+  scene: [
+    // HillScene,
+    WaterfallScene,
+    DemoScene,
+  ],
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,

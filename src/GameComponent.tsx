@@ -32,7 +32,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
   },
 };
 
-export function GameComponent() {
+export default function GameComponent() {
   useEffect(() => {
     const game = new Phaser.Game(gameConfig);
     return () => game.destroy(true);

@@ -21,8 +21,7 @@ function isWaterCurrent(cell: Cell): boolean {
 const doWaterfall = interactIfNotStarted<GameScene<WaterfallState>>(
   async (scene) => {
     await scene.showText("You reached the waterfall.", 3000);
-    // scene.scene.start("DemoScene");
-    window.open("/assets/video/portal.mp4", "_blank");
+    window.open("/portal");
   }
 );
 

@@ -22,7 +22,7 @@ export default function Entry() {
   }
 
   return (
-    <div className="entry-container">
+    <div className="page-container">
       <img src="/assets/image/logo.png" alt="Moomoo" />
       <h1>Help Moomoo Get Home</h1>
       <p>Enter the code...</p>

@@ -72,6 +72,12 @@ export default function Entry() {
 
   return (
     <div className="page-container">
+      <div id="compatibility">
+        <p>
+          You may need to play from another device. The rest of this game
+          requires a keyboard and a wider screen.
+        </p>
+      </div>
       <img src="/assets/image/logo.png" alt="Moomoo" />
       <h1>Help Moomoo Get Home</h1>
       <p>

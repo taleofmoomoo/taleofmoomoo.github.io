@@ -222,6 +222,18 @@ div#attribution a {
   animation: win 0.4s ease-in-out;
 }
 
+#compatibility {
+  max-width: 500px;
+  margin: 20px;
+  display: none;
+}
+
+@media (max-width: 600px), (pointer: coarse) {
+  #compatibility {
+    display: block;
+  }
+}
+
 .hint-container {
   max-width: 550px;
 }

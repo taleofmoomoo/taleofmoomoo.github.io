@@ -8,5 +8,4 @@ Help a tuxedo cat and her owner unite.
 - Sprites adapted from [Joao9396](https://joao9396.itch.io/pixel-cats-pack)
 - Music by Eric Matyas, [soundimage.com](https://soundimage.org)
 - Video generated with Sora, OpenAI
-
-Story and puzzles designed by Vinesh Kannan.
+- Story and puzzles by Vinesh Kannan

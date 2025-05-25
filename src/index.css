@@ -170,6 +170,10 @@ div#attribution a {
   z-index: -1;
 }
 
+.code-container {
+  margin: 10px;
+}
+
 .code-container input, .code-container button {
   box-sizing: border-box;
   margin: 10px;

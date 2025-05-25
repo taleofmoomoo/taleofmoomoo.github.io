@@ -25,10 +25,17 @@ export default function Entry() {
     <div className="page-container">
       <img src="/assets/image/logo.png" alt="Moomoo" />
       <h1>Help Moomoo Get Home</h1>
-      <p>Enter the code...</p>
+      <p>
+        <span>I made a </span>
+        <a href="/assets/document/poster.pdf" target="_blank">
+          poster
+        </a>
+        <span> to find my lost cat.</span>
+      </p>
       <div className={`code-container ${resultClass}`}>
         <input
           type="text"
+          placeholder="Enter the code..."
           maxLength={4}
           value={code}
           onChange={(e) => setCode(e.target.value.trim())}

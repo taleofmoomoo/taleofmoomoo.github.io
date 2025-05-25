@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { DemoScene } from "./scenes/demo";
 import { HillScene } from "./scenes/hill";
 import { WaterfallScene } from "./scenes/waterfall";
+import { useNavigate } from "react-router-dom";
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: "Tale of Moomoo",
@@ -33,10 +34,25 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
 };
 
 export default function GameComponent() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const game = new Phaser.Game(gameConfig);
     return () => game.destroy(true);
   }, []);
+
+  useEffect(() => {
+    const onNavigateRequest = (event: Event) => {
+      const { path } = (event as CustomEvent).detail;
+      if (!path.startsWith("/")) {
+        return;
+      }
+      navigate(path);
+    };
+
+    window.addEventListener("navigate", onNavigateRequest);
+    return () => window.removeEventListener("navigate", onNavigateRequest);
+  }, [navigate]);
 
   return (
     <div id="game">

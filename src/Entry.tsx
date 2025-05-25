@@ -24,10 +24,12 @@ export default function Entry() {
   return (
     <div className="entry-container">
       <img src="/assets/image/logo.png" alt="Moomoo" />
-      <h1>Where did Moomoo go?</h1>
+      <h1>Help Moomoo Get Home</h1>
+      <p>Enter the code...</p>
       <div className={`code-container ${resultClass}`}>
         <input
           type="text"
+          maxLength={4}
           value={code}
           onChange={(e) => setCode(e.target.value.trim())}
           onKeyDown={(e) => {

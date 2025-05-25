@@ -1,10 +1,10 @@
 {
-    "activeFile": "",
+    "activeFile": "maps/waterfall.json",
     "expandedProjectPaths": [
-        "dev",
-        ".",
         "tiles",
-        "maps"
+        "maps",
+        ".",
+        "dev"
     ],
     "fileStates": {
         "": {
@@ -61,15 +61,36 @@
         },
         "maps/hill.json#Water": {
             "scaleInDock": 1
+        },
+        "maps/waterfall.json": {
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": -125,
+                "y": -865
+            }
+        },
+        "maps/waterfall.json#Adventure": {
+            "scaleInDock": 1
+        },
+        "maps/waterfall.json#Collisions": {
+            "scaleInDock": 1
+        },
+        "maps/waterfall.json#Creatures": {
+            "scaleInDock": 1
+        },
+        "maps/waterfall.json#Water": {
+            "scaleInDock": 1
         }
     },
     "last.imagePath": "/Users/vineshkannan/Documents/Memes/taleofmoomoo.github.io/public/assets/tiled/sprites",
     "openFiles": [
-        "maps/demo.json"
+        "maps/waterfall.json"
     ],
     "project": "taleofmoomoo.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "maps/waterfall.json",
         "maps/hill.json",
         "maps/demo.json"
     ],

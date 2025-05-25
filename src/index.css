@@ -66,7 +66,6 @@ div#attribution a {
   color: white;
 }
 
-
 #hud {
   display: none;
   position: fixed;
@@ -89,4 +88,59 @@ div#attribution a {
   font-size: 14px;
   padding: 30px;
   opacity: 0.85;
+}
+
+.entry-container {
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: monospace;
+}
+
+.entry-container h1 { 
+  font-size: 40px;
+  margin: 20px;
+  text-align: center;
+}
+
+.entry-container img {
+  width: 200px;
+}
+
+.code-container input, .code-container button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 24px;
+  font-family: monospace;
+  border: 1px solid black;
+  outline: none;
+}
+
+.code-container button {
+  background: white;
+  color: black;
+  cursor: pointer;
+}
+
+.code-container button:hover {
+  background: var(--accent-color);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.code-container.incorrect input {
+  border-color: rgb(232, 68, 68);
+  animation: shake 0.4s ease-in-out;
+}
+
+.code-container.correct input {
+  border-color: rgb(88, 211, 88);
 }

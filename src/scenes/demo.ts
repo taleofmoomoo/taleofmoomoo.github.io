@@ -1,6 +1,10 @@
 import { GameScene } from "../core/game-scene";
 
-export class DemoScene extends GameScene {
+type DemoState = {
+  isSolved: boolean;
+};
+
+export class DemoScene extends GameScene<DemoState> {
   constructor() {
     super({
       key: "DemoScene",
@@ -23,7 +27,10 @@ export class DemoScene extends GameScene {
       },
       startCharLayer: "Collisions",
       startPosition: { x: 7, y: 12 },
-      sceneInteractionMap: {},
+      interactionMap: {},
+      initialState: {
+        isSolved: false,
+      },
     });
   }
 

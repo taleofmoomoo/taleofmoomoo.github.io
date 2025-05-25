@@ -1,10 +1,58 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+function Hint({ guessCount }: { guessCount: number }) {
+  const offerHint = guessCount >= 5;
+  const [showFirstHint, setShowFirstHint] = useState(false);
+  const [showSecondHint, setShowSecondHint] = useState(false);
+  const [showThirdHint, setShowThirdHint] = useState(false);
+
+  if (!offerHint) {
+    return null;
+  }
+
+  return (
+    <div className="hint-container">
+      <p className="hint-trigger" onClick={() => setShowFirstHint(true)}>
+        Need a hint?
+      </p>
+      {showFirstHint && (
+        <>
+          <p>
+            Investigate the missing cat poster. Are you entering the numbers you
+            see or the numbers you don't see?
+          </p>
+          <p className="hint-trigger" onClick={() => setShowSecondHint(true)}>
+            Need another hint?
+          </p>
+        </>
+      )}
+      {showSecondHint && (
+        <>
+          <p>
+            Where are the missing numbers? Could it be some kind of invisible
+            ink?
+          </p>
+          <p className="hint-trigger" onClick={() => setShowThirdHint(true)}>
+            One more hint?
+          </p>
+        </>
+      )}
+      {showThirdHint && (
+        <p>
+          Copy and paste the phone number. Your highlight will reveal what is
+          unseen.
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function Entry() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [resultClass, setResultClass] = useState("");
+  const [guessCount, setGuessCount] = useState(0);
 
   function handleSubmit() {
     setResultClass("");
@@ -12,13 +60,14 @@ export default function Entry() {
       setResultClass("correct");
       setTimeout(() => {
         navigate("/game");
-      }, 2000);
+      }, 750);
     } else {
       setResultClass("incorrect");
       setTimeout(() => {
         setResultClass("");
       }, 2000);
     }
+    setGuessCount((prev) => prev + 1);
   }
 
   return (
@@ -47,6 +96,7 @@ export default function Entry() {
         />
         <button onClick={handleSubmit}>Submit</button>
       </div>
+      <Hint guessCount={guessCount} />
     </div>
   );
 }

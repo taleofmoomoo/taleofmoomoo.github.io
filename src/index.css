@@ -215,3 +215,26 @@ div#attribution a {
   border-color: rgb(88, 211, 88);
   animation: win 0.4s ease-in-out;
 }
+
+.hint-container {
+  max-width: 550px;
+  line-height: 24px;
+}
+
+.hint-container p {
+  margin: 20px;
+  font-size: 16px;
+}
+
+.hint-trigger {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 10px;
+  font-size: 18px;
+}
+
+.hint-trigger:hover {
+  color: var(--accent-color);
+  text-decoration-style: dotted;
+}

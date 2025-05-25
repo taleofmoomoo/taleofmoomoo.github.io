@@ -8,7 +8,7 @@ export default function Entry() {
 
   function handleSubmit() {
     setResultClass("");
-    if (code === "5987") {
+    if (code === "4779") {
       setResultClass("correct");
       setTimeout(() => {
         navigate("/game");

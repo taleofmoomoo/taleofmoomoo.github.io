@@ -136,4 +136,4 @@ dist
 .pnp.*
 
 .DS_Store
-public/assets/tiled/taleofmoomoo.tiled-session
+**/*.tiled-session

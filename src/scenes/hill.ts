@@ -23,14 +23,14 @@ function makeTwoByOneAt(topLeft: Cell): Cell[] {
   ];
 }
 
-const CAT_RIGHT_CELL = { x: 18, y: 34 };
+const CAT_RIGHT_CELL = { x: 34, y: 34 };
 const BIG_WALK_TARGET_DISTANCE = 27;
 
 const doChatWithCat = interactIfNotStarted<GameScene<HillState>>(
   async (scene) => {
     const { isWalking, isSolved } = scene.state;
     if (isSolved) {
-      await scene.showText("The path home is through the cave...", 3000);
+      await scene.showText("The path home is through the falls...", 3000);
       await scene.showText("Go to the cliff. Take a leap of faith.", 3000);
       return;
     }
@@ -89,20 +89,30 @@ const doLeapOfFaith = interactIfNotStarted<GameScene<HillState>>(
   }
 );
 
+const doLookAtShore = interactIfNotStarted<GameScene<HillState>>(
+  async (scene) => {
+    await scene.showText("You reached the shoreline. The water is cold.", 3000);
+  }
+);
+
 const interactables: Interactable<GameScene<HillState>>[] = [
   {
     cells: makeTwoByOneAt({ x: CAT_RIGHT_CELL.x - 1, y: CAT_RIGHT_CELL.y }),
     action: doChatWithCat,
   },
   {
-    cells: makeTwoByOneAt({ x: 27, y: 52 }),
+    cells: makeTwoByOneAt({ x: 43, y: 52 }),
     action: doChatWithRock,
   },
   {
+    cells: makeRows([{ leftEdge: { x: 25, y: 22 }, length: 28 }]),
+    action: doLookAtShore,
+  },
+  {
     cells: makeRows([
-      { leftEdge: { x: 29, y: 58 }, length: 3 },
-      { leftEdge: { x: 28, y: 59 }, length: 5 },
-      { leftEdge: { x: 24, y: 60 }, length: 21 },
+      { leftEdge: { x: 45, y: 58 }, length: 3 },
+      { leftEdge: { x: 44, y: 59 }, length: 5 },
+      { leftEdge: { x: 40, y: 60 }, length: 21 },
     ]),
     action: doLeapOfFaith,
   },
@@ -139,9 +149,9 @@ export class HillScene extends GameScene<HillState> {
         path: "../assets/audio/hypnotic-puzzle-2-looping.mp3",
       },
       startCharLayer: "Collisions",
-      startPosition: { x: 27, y: 57 },
+      startPosition: { x: 43, y: 57 },
       // For testing the start of the puzzle.
-      // startPosition: { x: 18, y: 35 },
+      // startPosition: { x: 34, y: 35 },
       interactionMap,
       initialState: {
         isWalking: false,
